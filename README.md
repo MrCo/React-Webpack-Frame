@@ -33,6 +33,7 @@
 - "less": "^3.0.1",
 - "less-loader": "^4.1.0",
 - "react-router": "^4.2.0"
+- "webpack-dev-server": "^2.9.7"<p style="background:yellow; color:red; font-size:14px;">微Web服务,安装时候版本不可以安装2以上版本,否则会报invalid "instanceof" keyword value Promise</p>  
 
 ## 运行方式
 > 必须按步骤执行
