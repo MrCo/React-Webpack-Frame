@@ -18,6 +18,9 @@
                 },
                 //此规则不包括node_modules文件夹中的文件
                 exclude:/node_modules/
+                // query: {
+                //     presets: ['react', 'es2015']
+                // }
             },
             {
                 test:/\.css/,

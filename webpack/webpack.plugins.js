@@ -36,11 +36,11 @@
     }
 
     //全局变量设置
-    plugins.push(
-        new webpack.ProvidePlugin({
-            $:'jquery'
-        })
-    );
+    // plugins.push(
+    //     new webpack.ProvidePlugin({
+    //         $:'jquery'
+    //     })
+    // );
 
     //公共库打包
     plugins.push(
@@ -51,9 +51,9 @@
     );
 
     //排除不需要打包的业务中脚本
-    plugins.push(
-        new webpack.IgnorePlugin(/jquyery.js$/)
-    )
+    // plugins.push(
+    //     new webpack.IgnorePlugin(/jquyery.js$/)
+    // )
 
     m.exports = plugins;
 }(module));

@@ -10,26 +10,28 @@ import './style.less';
 
 import imgBanner from '../../assets/images/banner.jpg';
 
-class Index extends React.Component{
+class Index extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         //console.log($('body').html());
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
 
     }
 
-    render(){
-        <div>
-            <h1>hello webpack and react</h1>
-            <img src={imgBanner}></img>
-        </div>
+    render() {
+        return (
+            <div>
+                <h1>Hello Webpack And React</h1>
+                <img src={imgBanner}></img>
+            </div>
+        )
     }
 }
 

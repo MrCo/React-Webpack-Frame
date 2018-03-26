@@ -7,10 +7,10 @@
     'use strict';
     const path = require('path');
     m.exports = {
-        modules:[__dirname,'node_modules'],
-        alias:{
-            'jquery':'src/libs/jquery-1.11.3/jquery.min.js'
-        },
-        extensions:['*','.js']
+        // modules:[__dirname,'node_modules'],
+        // alias:{
+        //     'jquery':'src/libs/jquery-1.11.3/jquery.min.js'
+        // },
+        // extensions:['*','.js']
     };
 }(module));
