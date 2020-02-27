@@ -1,5 +1,6 @@
-# React + Webpack脚手架 V1.0
+# React + Webpack脚手架 V2.0（SPA版本）
 > 主要以组件化开发方式,目前该脚手架只针对IE8+浏览器进行开发迭代
+> V2.0版将webpack3.x版本升级到webpack4.x，部分webpack配置有所改变
 
 ***
 
@@ -15,8 +16,13 @@
 |   |---- components    组件
 |   |---- libs          类库
 |   |---- templates     模板
+|   |---- pages         页面
+|   |---- router        路由
+|   |---- enter.js      主入口
+|   |---- index.html    主输出模板页(可配置多个)
 |---- webpack 配置目录
 |---- webpack.config.js 
+|---- webpack.dll.js    新增优化打包输出dll配置 
 ```
 
 ***
@@ -38,11 +44,8 @@
 ## 运行方式
 > 必须按步骤执行
 
-* 开发环境 npm run dev
-* 调试环境 npm run hot
-* 开发调试 npm run hotdev
+* 打包优化 npm run dll
+* 目录生成 npm run dev
+* 开发调试 npm run hot
 * 接口代理 npm run server
 * 代码发布 npm run build
-
-## 开发迭代记录
-> 2018.03.13    搭建
