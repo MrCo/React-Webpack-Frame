@@ -75,21 +75,11 @@
                 entry = {},
                 scriptFolderName = 'scripts';
 
-            //HTML模板+Component组件
-            glob.sync(`${_this.config.templateUrl}/*.html`).forEach(function (filePath) {
-                let _fileName = path.basename(filePath,'.html'),
-                    _groupFiles = [];
-
-                glob.sync(`${_this.config.componentUrl}/${_fileName}/*.js`).forEach(function (filePath) {
-                    _groupFiles.push(filePath);
-                });
-
-                entry[scriptFolderName + '/views/' + _fileName] = _groupFiles.length <= 1 ? _groupFiles.join('') : _groupFiles;
-            })
+            entry['app'] = path.resolve(__dirname,'../src/enter.js');
 
             //公共库
-            entry[scriptFolderName + '/libs/jquery'] = ['jquery'];
-            entry[scriptFolderName + '/libs/react'] = ['react','react-dom'];
+            // entry[scriptFolderName + '/libs/jquery'] = ['jquery'];
+            // entry[scriptFolderName + '/libs/react'] = ['react','react-dom'];
 
             return entry;
         },
@@ -114,25 +104,40 @@
                 plugins = [],
                 scriptFolderName = 'scripts';
 
-            glob.sync(`${_this.config.templateUrl}/*.html`).forEach(function (filePath) {
-                let _fileName = path.basename(filePath),
-                    _folderName = path.basename(filePath,'.html');
+            // glob.sync(`${_this.config.templateUrl}/*.html`).forEach(function (filePath) {
+            //     let _fileName = path.basename(filePath),
+            //         _folderName = path.basename(filePath,'.html');
 
-                plugins.push(new htmlWebpackPlugin({
-                    filename:'views/' + _folderName + '/' + _fileName,
-                    template:path.resolve(filePath),
-                    inject:'body',
-                    hash:true,
-                    chunks:[
-                        scriptFolderName + '/libs/jquery',
-                        scriptFolderName + '/libs/react',
-                        scriptFolderName + '/views/' + _folderName
-                    ],
-                    //手动顺序
-                    chunksSortMode:'manual'
-                }));
+            //     plugins.push(new htmlWebpackPlugin({
+            //         filename:'views/' + _folderName + '/' + _fileName,
+            //         template:path.resolve(filePath),
+            //         inject:'body',
+            //         hash:true,
+            //         chunks:[
+            //             scriptFolderName + '/libs/jquery',
+            //             scriptFolderName + '/libs/react',
+            //             scriptFolderName + '/views/' + _folderName
+            //         ],
+            //         //手动顺序
+            //         chunksSortMode:'manual'
+            //     }));
 
-            });
+            // });
+
+            plugins.push(new htmlWebpackPlugin({
+                filename:'index.html',
+                template:path.resolve(__dirname,'../src/index.html'),
+                inject:'body',
+                hash:true
+                // chunks:[
+                //     scriptFolderName + '/libs/jquery',
+                //     scriptFolderName + '/libs/react',
+                //     scriptFolderName + '/views/' + _folderName
+                // ],
+                // //手动顺序
+                // chunksSortMode:'manual'
+            }));
+
 
             return plugins;
         },
@@ -144,7 +149,6 @@
             return _this.config.isHot() || _this.config.isDev() ? 'inline-source-map' : _this.config.isProduction() ? 'cheap-module-source-map' : 'source-map';
         }
     }
-
 
     m.exports = Helper;
 }(module));

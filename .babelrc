@@ -5,5 +5,7 @@
     "stage-0",
     "env"
   ],
-  "plugins": []
+  "plugins": [
+    "transform-class-properties"
+  ]
 }

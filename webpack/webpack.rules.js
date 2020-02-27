@@ -9,18 +9,31 @@
         rules = [
             {
                 test:/\.(png|jpg|gif|jpeg)$/i,
-                loader:'url-loader?limit=1024&name=/images/[name]-[hash:8].[ext]'
+                
+                //webpack3.x写法
+                //loader:'url-loader?limit=1024&name=/images/[name]-[hash:8].[ext]'
+
+                //webpack4.x写法
+                use: [
+                    {
+                      loader: 'file-loader',
+                      options: {
+                        name: '[name]-[hash:8].[ext]',
+                        outputPath:'/images/'
+                      }
+                    }
+                  ]
             },
             {
-                test:/(\.js)$/,
+                test:/\.(js|jsx)$/,
                 use:{
-                    loader:'babel-loader'
+                    loader:'babel-loader',
+                    options: {
+                        presets: ['react', 'es2015']
+                    }
                 },
                 //此规则不包括node_modules文件夹中的文件
                 exclude:/node_modules/
-                // query: {
-                //     presets: ['react', 'es2015']
-                // }
             },
             {
                 test:/\.css/,
@@ -37,7 +50,15 @@
             },
             {
                 test:/\.less/i,
-                use:extractTextPlugin.extract(['css-loader','less-loader'])
+                use:extractTextPlugin.extract([
+                    'css-loader',
+                    {
+                        loader:'less-loader',
+                        options:{
+                            javascriptEnabled:true
+                        }
+                    }
+                ])
             }
         ]
 
