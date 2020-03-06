@@ -16,7 +16,12 @@
             contentBase:webpackHelper.environmentDir(),
             historyApiFallback:true,
             inline:true,
-            port:'2000'
+            port:'2000',
+            progress:true,
+            quiet: true,
+            watchOptions: {
+                aggregateTimeout: 300
+            },
         };
 
         m.exports = hotServer;

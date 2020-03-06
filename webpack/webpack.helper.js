@@ -93,7 +93,9 @@
                 path:path.resolve('./',_this.environmentDir()),
                 //如果src目录与打包目录不一致的时候需要单独配置
                 //publicPath:'/pulbic/static',
-                chunkFilename:'[name].js'
+                chunkFilename:'[name].js',
+                // globalObject: 'this',
+                // libraryTarget: 'umd'
             }
         },
         /**

@@ -11,6 +11,9 @@
         extractTextPlugin = require('extract-text-webpack-plugin'),
         copyWebpackPlugin = require('copy-webpack-plugin'),
         bundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+        happyPack = require('happypack'),
+        os = require('os'),
+        happyThreadPool = happyPack.ThreadPool({ size:os.cpus().length }),
         path = require('path'),
         plugins = [
             //分离css和js文件
@@ -29,6 +32,51 @@
         //打包性能分析
         plugins.push(new bundleAnalyzerPlugin());
     }
+
+    plugins.push(
+        new happyPack({            
+            loaders: [      
+                //缓存插件，提升打包速度
+                'cache-loader',                       
+                {
+                    loader:'babel-loader',//?presets[]=es2015
+                    options:{
+                        presets: ['react','es2015'],
+                        //开启缓存，第一次编译过后，加快再次编译速度.
+                        cacheDirectory:true
+                        //exclude:'node_modules'
+                    }
+                }
+            ],            
+            threadPool: happyThreadPool,
+            id: 'babel'
+          })
+    );
+
+    plugins.push(
+        new happyPack({            
+            loaders: [                 
+                {
+                    loader: "style-loader"
+                }, 
+                {
+                    loader: "css-loader",
+                    options:{
+                        //设置为true的情况下,CSS在React中可以支持以对象方式调用
+                        modules:true        
+                    }
+                },
+                {
+                    loader: "less-loader",
+                    options:{
+                        javascriptEnabled:true
+                    }
+                }
+            ],
+            threadPool: happyThreadPool,
+            id: 'css'
+          })
+    )
 
     //删除之前构建的目录
     //注: webpack-dev-server也会执行webpack.config,避免打包好的又被删除
