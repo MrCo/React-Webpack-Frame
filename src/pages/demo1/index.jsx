@@ -2,8 +2,8 @@ import React,{ Component } from 'react/';
 import { DatePicker } from 'antd';
 import echarts from 'echarts';
 
-//import '../../../node_modules/antd/dist/antd.less';
-import '@antd/antd.less';
+import '../../../node_modules/antd/dist/antd.less';
+//import '@antd/antd.less';
 import './style';
 
 export default class Demo1 extends Component{
