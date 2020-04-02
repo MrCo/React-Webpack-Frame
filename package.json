@@ -7,12 +7,29 @@
     "dev": "set NODE_ENV=dev&&webpack --progress --colors --profile",
     "hot": "set NODE_ENV=hot&&webpack-dev-server --progress --open --inline --hot --colors --profile",
     "build": "set NODE_ENV=production&&webpack --progress --colors ---profile",
-    "hotdev": "npm run dev&&npm run hot"
+    "hotdev": "npm run dev&&npm run hot",
+    "lint": "eslint --ext .js,.jsx src/",
+    "precommit": "eslint src/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/*.{js,jsx,json,css,less}": [
+      "eslint",
+      "git add",
+      "git commit"
+    ]
   },
   "devDependencies": {
     "@babel/preset-env": "^7.8.4",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "antd": "^3.26.12",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -23,14 +40,24 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "echarts": "^4.6.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^5.1.0",
     "glob": "^7.1.2",
     "happypack": "^5.0.1",
     "html-webpack-plugin": "^4.0.0-beta.11",
+    "husky": "^4.2.3",
     "jquery": "^3.3.1",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
+    "lint-staged": "^10.1.1",
+    "prettier": "^2.0.2",
+    "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router": "^4.2.0",

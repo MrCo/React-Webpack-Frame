@@ -49,7 +49,7 @@
             // },
             {
                 test: /\.(png|jpg|gif|jpeg)$/i,
-                include:/(src)/,
+                include: /(src)/,
                 //webpack3.x写法
                 //loader:'url-loader?limit=1024&name=/images/[name]-[hash:8].[ext]'
 
@@ -66,13 +66,23 @@
             },
             {
                 test: /\.(js|jsx)$/,
-                include:/(src)/,
-                use:[
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                include: [path.resolve(__dirname, '../src')],
+                exclude: /node_modules/,
+                options: {
+                    fix: true
+                }
+            },
+            {
+                test: /\.(js|jsx)$/,
+                include: /(src)/,
+                use: [
                     {
-                        loader:"thread-loader"
-                    },        
+                        loader: "thread-loader"
+                    },
                     {
-                        loader:'babel-loader',
+                        loader: 'babel-loader',
                         options: {
                             presets: ['react', 'es2015']
                         }
@@ -80,36 +90,36 @@
                 ],
 
                 //use: ['happypack/loader?id=babel']
-                include:[path.resolve(__dirname,'../src')]
+                include: [path.resolve(__dirname, '../src')]
                 //此规则不包括node_modules文件夹中的文件
                 //exclude: /node_modules/
             },
-           
+
             {
-                test:/\.(less|css)/,
-                use:extractTextPlugin.extract({
-                    use:[                        
+                test: /\.(less|css)/,
+                use: extractTextPlugin.extract({
+                    use: [
                         {
-                            loader:'css-loader',
-                            options:{
+                            loader: 'css-loader',
+                            options: {
                                 //设置为true的情况下,CSS在React中可以支持以对象方式调用
-                                modules:true
+                                modules: true
                             }
                         },
                         {
-                            loader:'less-loader',
-                            options:{
-                                javascriptEnabled:true
+                            loader: 'less-loader',
+                            options: {
+                                javascriptEnabled: true
                             }
                         },
                         {
-                            loader:'thread-loader',
-                            options: {                            
+                            loader: 'thread-loader',
+                            options: {
                                 workers: os.cpus().length
                             }
                         }
                     ],
-                    fallback:'style-loader'
+                    fallback: 'style-loader'
                 })
             },
             // {
